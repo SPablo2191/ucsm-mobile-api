@@ -1,4 +1,5 @@
 from django.contrib.auth.models import AbstractBaseUser, UserManager, PermissionsMixin
+from django.contrib import admin
 from django.db import models
 from enum import Enum
 from datetime import date
@@ -77,3 +78,7 @@ class Student(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+
+@admin.register(Student)
+class StudentAdmin(admin.ModelAdmin):
+    list_display = ("identification_document","first_name", "last_name","email")
