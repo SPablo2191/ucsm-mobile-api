@@ -74,7 +74,7 @@ class Student(AbstractBaseUser, PermissionsMixin):
         return f"{self.first_name} {self.last_name}"
 
     def get_short_name(self):
-        return self.first_name
+        return self.first_name or self.identification_document
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
