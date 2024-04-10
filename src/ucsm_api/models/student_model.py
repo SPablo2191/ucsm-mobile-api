@@ -4,6 +4,7 @@ from django.db import models
 from enum import Enum
 from datetime import date
 from django.utils import timezone
+import uuid
 
 
 class StudentStatus(Enum):
@@ -32,20 +33,29 @@ class StudentManager(UserManager):
         user.save(using=self._db)
         return user
 
-    def create_user(self, identification_document=None,email=None, password=None, **extra_fields):
+    def create_user(
+        self, identification_document=None, email=None, password=None, **extra_fields
+    ):
         extra_fields.setdefault("is_staff", False)
         extra_fields.setdefault("is_superuser", False)
-        return self._create_user(identification_document,email, password, **extra_fields)
+        return self._create_user(
+            identification_document, email, password, **extra_fields
+        )
 
     def create_superuser(
-        self, identification_document=None,email=None,  password=None, **extra_fields
+        self, identification_document=None, email=None, password=None, **extra_fields
     ):
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
-        return self._create_user(identification_document,email, password, **extra_fields)
+        return self._create_user(
+            identification_document, email, password, **extra_fields
+        )
 
 
 class Student(AbstractBaseUser, PermissionsMixin):
+    id = models.UUIDField(
+        default=uuid.uuid4, unique=True, primary_key=True, editable=False
+    )
     first_name = models.CharField(max_length=150, blank=True, default="")
     middle_name = models.CharField(max_length=150, blank=True, default="")
     last_name = models.CharField(max_length=150, blank=True, default="")
@@ -63,7 +73,7 @@ class Student(AbstractBaseUser, PermissionsMixin):
     is_superuser = models.BooleanField(default=False)
     objects = StudentManager()
     USERNAME_FIELD = "identification_document"
-    EMAIL_FIELD = 'email'
+    EMAIL_FIELD = "email"
     REQUIRED_FIELDS = []
 
     class Meta:
@@ -79,6 +89,7 @@ class Student(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
+
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ("identification_document","first_name", "last_name","email")
+    list_display = ("identification_document", "first_name", "last_name", "email")
