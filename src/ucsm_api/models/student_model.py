@@ -1,9 +1,10 @@
 from django.contrib.auth.models import AbstractBaseUser, UserManager, PermissionsMixin
 from django.contrib import admin
 from django.db import models
-from enum import Enum
-from datetime import date
 from django.utils import timezone
+
+from datetime import date
+from enum import Enum
 import uuid
 
 
