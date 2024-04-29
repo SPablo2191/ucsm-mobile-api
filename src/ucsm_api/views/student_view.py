@@ -5,7 +5,7 @@ from drf_spectacular.utils import extend_schema
 from rest_framework import viewsets, filters, status
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import permission_classes
-from rest_framework.permissions import AllowAny, IsAdminUser
+from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -92,3 +92,11 @@ class StudentLoginAPIView(APIView):
             return Response(
                 {"error": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED
             )
+
+class StudentLogoutAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, *args):
+        token = Token.objects.get(user=request.user)
+        token.delete()
+        return Response({"success": True, "detail": "Logged out!"}, status=status.HTTP_200_OK)

@@ -57,6 +57,16 @@ paths:
                   error:
                     type: string
           description: ''
+  /api/logout/:
+    post:
+      operationId: api_logout_create
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          description: No response body
   /api/professors/:
     get:
       operationId: api_professors_list
