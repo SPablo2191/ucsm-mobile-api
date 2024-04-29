@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "django_filters",
     "django_extensions",
+    'drf_spectacular',
     "ucsm_api",
 ]
 
@@ -144,7 +145,15 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     "PAGE_SIZE": 15,
 }
 
 TOKEN_EXPIRED_AFTER_SECONDS = 86400 # tiempo de expiración del token (24 hrs)
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'UCSM API',
+    'DESCRIPTION': 'API REST para la aplicación UCSM Mobile de la Universidad Católica de Santa María',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+}

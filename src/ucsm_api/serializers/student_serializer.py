@@ -5,3 +5,8 @@ class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
         fields = "__all__"
+
+class LoginSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Student
+        fields = ["identification_document","password"]
