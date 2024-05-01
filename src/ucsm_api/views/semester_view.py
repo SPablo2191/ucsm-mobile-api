@@ -1,11 +1,10 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from ..models.semester_model import Semester
 from ..serializers.semester_serializer import SemesterSerializer
 from ..models.utils import TableStatus
-from rest_framework import status
 
 class SemesterViewSet(viewsets.ModelViewSet):
     queryset = Semester.objects.all()
