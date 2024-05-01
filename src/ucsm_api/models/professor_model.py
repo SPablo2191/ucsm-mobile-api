@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.utils import timezone
 
 import uuid
+from .utils import TableStatus
 
 class Professor(models.Model):
     id = models.UUIDField(
@@ -13,7 +14,9 @@ class Professor(models.Model):
     last_name = models.CharField(max_length=150, blank=True, default="")
     email = models.EmailField(blank=True, default="")
     identification_document = models.CharField(max_length=50, unique=True)
+    status = models.CharField(max_length=20, default=TableStatus.ACTIVE.value)
     register_date = models.DateTimeField(default=timezone.now)
+
     class Meta:
         verbose_name = "Professor"
         verbose_name_plural = "Professors"
