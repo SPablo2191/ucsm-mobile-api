@@ -5,11 +5,13 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from .views.student_view import StudentViewSet,StudentLoginAPIView,StudentLogoutAPIView
 from .views.professor_view import ProfessorViewSet
 from .views.building_view import BuildingViewSet
+from .views.semester_view import SemesterViewSet 
 
 route = routers.SimpleRouter()
 route.register("students", StudentViewSet)
 route.register("professors",ProfessorViewSet)
 route.register("buildings",BuildingViewSet)
+route.register("semesters",SemesterViewSet)
 urlpatterns = route.urls
 
 urlpatterns += [
