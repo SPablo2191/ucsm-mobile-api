@@ -1,3 +1,4 @@
+from drf_spectacular.utils import extend_schema
 from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -5,7 +6,9 @@ from rest_framework.response import Response
 from ..models.building_model import Building
 from ..serializers.building_serializer import BuildingSerializer
 from ..models.utils import TableStatus
+from .constants import TagEnum
 
+@extend_schema(tags=[TagEnum.BUILDING.value])
 class BuildingViewSet(viewsets.ModelViewSet):
     queryset = Building.objects.all()
     serializer_class = BuildingSerializer

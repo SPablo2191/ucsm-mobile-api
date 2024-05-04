@@ -1,3 +1,4 @@
+from drf_spectacular.utils import extend_schema
 from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -5,7 +6,9 @@ from rest_framework.response import Response
 from ..models.professor_model import Professor
 from ..serializers.professor_serializer import ProfessorSerializer
 from ..models.utils import TableStatus
+from .constants import TagEnum
 
+@extend_schema(tags=[TagEnum.PROFESSOR.value])
 class ProfessorViewSet(viewsets.ModelViewSet):
     queryset = Professor.objects.all()
     serializer_class = ProfessorSerializer

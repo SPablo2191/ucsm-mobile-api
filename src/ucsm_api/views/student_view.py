@@ -10,10 +10,11 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .authentication import token_expire_handler, expires_in
+from .constants import TagEnum
 from ..models.student_model import Student
 from ..serializers.student_serializer import StudentSerializer,LoginSerializer
 
-
+@extend_schema(tags=[TagEnum.STUDENT.value])
 class StudentViewSet(viewsets.ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
@@ -23,7 +24,6 @@ class StudentViewSet(viewsets.ModelViewSet):
     filterset_fields = ["identification_document", "email", "status"]
     search_fields = ["identification_document"]
     permission_classes = [IsAdminUser]
-
     def get_queryset(self):
         queryset = super().get_queryset()
         ordering = self.request.query_params.get("ordering", None)
@@ -31,7 +31,7 @@ class StudentViewSet(viewsets.ModelViewSet):
             return queryset.order_by(ordering)
         return queryset
 
-
+@extend_schema(tags=[TagEnum.AUTH.value])
 @permission_classes((AllowAny,))
 class StudentLoginAPIView(APIView):
     @extend_schema(
@@ -92,7 +92,7 @@ class StudentLoginAPIView(APIView):
             return Response(
                 {"error": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED
             )
-
+@extend_schema(tags=[TagEnum.AUTH.value])
 class StudentLogoutAPIView(APIView):
     permission_classes = [IsAuthenticated]
 

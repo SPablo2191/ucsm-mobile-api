@@ -1,3 +1,4 @@
+from drf_spectacular.utils import extend_schema
 from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -5,7 +6,9 @@ from rest_framework.response import Response
 from ..models.semester_model import Semester
 from ..serializers.semester_serializer import SemesterSerializer
 from ..models.utils import TableStatus
+from .constants import TagEnum
 
+@extend_schema(tags=[TagEnum.SEMESTER.value])
 class SemesterViewSet(viewsets.ModelViewSet):
     queryset = Semester.objects.all()
     serializer_class = SemesterSerializer
