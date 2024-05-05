@@ -3,10 +3,10 @@ from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from ..models.professor_model import Professor
-from ..serializers.professor_serializer import ProfessorSerializer
-from ..models.utils import TableStatus
-from .constants import TagEnum
+from ucsm_api.models.professor_model import Professor
+from ucsm_api.serializers.professor_serializer import ProfessorSerializer
+from ucsm_api.models.utils import TableStatus
+from ucsm_api.views.constants import TagEnum
 
 @extend_schema(tags=[TagEnum.PROFESSOR.value])
 class ProfessorViewSet(viewsets.ModelViewSet):

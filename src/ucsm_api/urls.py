@@ -2,11 +2,11 @@ from rest_framework import routers
 from django.urls import path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
-from .views.student_view import StudentViewSet,StudentLoginAPIView,StudentLogoutAPIView
-from .views.professor_view import ProfessorViewSet
-from .views.building_view import BuildingViewSet
-from .views.semester_view import SemesterViewSet 
-from .constants import EndpointEnum
+from ucsm_api.views.student_view import StudentViewSet,StudentLoginAPIView,StudentLogoutAPIView
+from ucsm_api.views.professor_view import ProfessorViewSet
+from ucsm_api.views.building_view import BuildingViewSet
+from ucsm_api.views.semester_view import SemesterViewSet 
+from ucsm_api.constants import EndpointEnum
 
 route = routers.SimpleRouter()
 route.register(EndpointEnum.STUDENT, StudentViewSet)

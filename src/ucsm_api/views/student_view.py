@@ -9,10 +9,10 @@ from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .authentication import token_expire_handler, expires_in
-from .constants import TagEnum
-from ..models.student_model import Student
-from ..serializers.student_serializer import StudentSerializer,LoginSerializer
+from ucsm_api.views.authentication import token_expire_handler, expires_in
+from ucsm_api.views.constants import TagEnum
+from ucsm_api.models.student_model import Student
+from ucsm_api.serializers.student_serializer import StudentSerializer,LoginSerializer
 
 @extend_schema(tags=[TagEnum.STUDENT.value])
 class StudentViewSet(viewsets.ModelViewSet):

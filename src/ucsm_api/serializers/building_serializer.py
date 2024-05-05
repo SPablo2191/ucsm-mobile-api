@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ..models.building_model import Building
+from ucsm_api.models.building_model import Building
 
 class BuildingSerializer(serializers.ModelSerializer):
     class Meta:

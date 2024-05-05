@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ..models.professor_model import Professor
+from ucsm_api.models.professor_model import Professor
 
 class ProfessorSerializer(serializers.ModelSerializer):
     class Meta:

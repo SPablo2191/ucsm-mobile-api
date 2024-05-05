@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ..models.semester_model import Semester
+from ucsm_api.models.semester_model import Semester
 
 class SemesterSerializer(serializers.ModelSerializer):
     class Meta:

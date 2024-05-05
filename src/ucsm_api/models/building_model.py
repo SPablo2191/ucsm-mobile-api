@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.db import models
 from django.utils import timezone
 import uuid
-from .utils import TableStatus
+from ucsm_api.models.utils import TableStatus
 
 class Building(models.Model):
     id = models.UUIDField(
