@@ -1,5 +1,6 @@
 from drf_spectacular.utils import extend_schema
 from rest_framework import viewsets, status
+from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
@@ -13,11 +14,13 @@ class BuildingViewSet(viewsets.ModelViewSet):
     queryset = Building.objects.all()
     serializer_class = BuildingSerializer
     permission_classes = [IsAuthenticated]
+    pagination_class = LimitOffsetPagination 
 
     def list(self, request):
         queryset = Building.objects.filter(status=TableStatus.ACTIVE.value)
-        serializer = BuildingSerializer(queryset, many=True)
-        return Response(data=serializer.data,status=status.HTTP_200_OK)
+        paginated_queryset = self.paginate_queryset(queryset)
+        serializer = BuildingSerializer(paginated_queryset, many=True)
+        return self.get_paginated_response(serializer.data)
     
     def destroy(self, request, pk=None):
         instance = self.get_object()
