@@ -9,7 +9,7 @@ from ucsm_api.models.utils import TableStatus
 from ucsm_api.serializers.plan_serializer import PlanSerializer
 from ucsm_api.views.constants import TagEnum
 
-@extend_schema(tags=[TagEnum.PLAN])
+@extend_schema(tags=[TagEnum.PLAN.value])
 class PlanViewSet(viewsets.ModelViewSet):
     queryset = Plan.objects.all()
     serializer_class = PlanSerializer

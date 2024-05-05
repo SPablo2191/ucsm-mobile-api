@@ -9,7 +9,7 @@ from ucsm_api.models.utils import TableStatus
 from ucsm_api.serializers.building_serializer import BuildingSerializer
 from ucsm_api.views.constants import TagEnum
 
-@extend_schema(tags=[TagEnum.BUILDING])
+@extend_schema(tags=[TagEnum.BUILDING.value])
 class BuildingViewSet(viewsets.ModelViewSet):
     queryset = Building.objects.all()
     serializer_class = BuildingSerializer

@@ -14,7 +14,7 @@ from ucsm_api.views.constants import TagEnum
 from ucsm_api.models.student_model import Student
 from ucsm_api.serializers.student_serializer import StudentSerializer,LoginSerializer
 
-@extend_schema(tags=[TagEnum.STUDENT])
+@extend_schema(tags=[TagEnum.STUDENT.value])
 class StudentViewSet(viewsets.ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer

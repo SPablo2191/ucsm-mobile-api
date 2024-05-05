@@ -10,7 +10,7 @@ from ucsm_api.serializers.semester_serializer import SemesterSerializer
 from ucsm_api.models.utils import TableStatus
 from ucsm_api.views.constants import TagEnum
 
-@extend_schema(tags=[TagEnum.SEMESTER])
+@extend_schema(tags=[TagEnum.SEMESTER.value])
 class SemesterViewSet(viewsets.ModelViewSet):
     queryset = Semester.objects.all()
     serializer_class = SemesterSerializer

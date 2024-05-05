@@ -11,3 +11,4 @@ class EndpointEnum(str,Enum):
     EVENT = 'events'
     PLAN = 'plans'
     SCHEMA = 'schema'
+    ACADEMIC_PROGRAM = 'academic-programs'

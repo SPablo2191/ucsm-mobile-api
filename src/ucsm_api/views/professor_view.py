@@ -9,7 +9,7 @@ from ucsm_api.serializers.professor_serializer import ProfessorSerializer
 from ucsm_api.models.utils import TableStatus
 from ucsm_api.views.constants import TagEnum
 
-@extend_schema(tags=[TagEnum.PROFESSOR])
+@extend_schema(tags=[TagEnum.PROFESSOR.value])
 class ProfessorViewSet(viewsets.ModelViewSet):
     queryset = Professor.objects.all()
     serializer_class = ProfessorSerializer
