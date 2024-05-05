@@ -6,3 +6,4 @@ class TagEnum(Enum):
     PROFESSOR = "Professor"
     SEMESTER = "Semester"
     BUILDING = "Building"
+    EVENT = "Event"

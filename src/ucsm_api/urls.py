@@ -6,6 +6,7 @@ from ucsm_api.views.student_view import StudentViewSet,StudentLoginAPIView,Stude
 from ucsm_api.views.professor_view import ProfessorViewSet
 from ucsm_api.views.building_view import BuildingViewSet
 from ucsm_api.views.semester_view import SemesterViewSet 
+from ucsm_api.views.event_view import EventViewSet
 from ucsm_api.constants import EndpointEnum
 
 route = routers.SimpleRouter()
@@ -13,6 +14,7 @@ route.register(EndpointEnum.STUDENT, StudentViewSet)
 route.register(EndpointEnum.PROFESSOR,ProfessorViewSet)
 route.register(EndpointEnum.BUILDING,BuildingViewSet)
 route.register(EndpointEnum.SEMESTER,SemesterViewSet)
+route.register(EndpointEnum.EVENT,EventViewSet)
 urlpatterns = route.urls
 
 urlpatterns += [
