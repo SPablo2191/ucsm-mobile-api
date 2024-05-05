@@ -1,15 +1,323 @@
 openapi: 3.0.3
 info:
   title: UCSM API
-  version: 1.0.0
+  version: 0.0.1
   description: API REST para la aplicación UCSM Mobile de la Universidad Católica
     de Santa María
 paths:
+  /api/buildings/:
+    get:
+      operationId: api_buildings_list
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      tags:
+      - TagEnum.BUILDING
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedBuildingList'
+          description: ''
+    post:
+      operationId: api_buildings_create
+      tags:
+      - TagEnum.BUILDING
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Building'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Building'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Building'
+      security:
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Building'
+          description: ''
+  /api/buildings/{id}/:
+    get:
+      operationId: api_buildings_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this building.
+        required: true
+      tags:
+      - TagEnum.BUILDING
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Building'
+          description: ''
+    put:
+      operationId: api_buildings_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this building.
+        required: true
+      tags:
+      - TagEnum.BUILDING
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Building'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Building'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Building'
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Building'
+          description: ''
+    patch:
+      operationId: api_buildings_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this building.
+        required: true
+      tags:
+      - TagEnum.BUILDING
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedBuilding'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedBuilding'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedBuilding'
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Building'
+          description: ''
+    delete:
+      operationId: api_buildings_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this building.
+        required: true
+      tags:
+      - TagEnum.BUILDING
+      security:
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/events/:
+    get:
+      operationId: api_events_list
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      tags:
+      - TagEnum.EVENT
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedEventList'
+          description: ''
+    post:
+      operationId: api_events_create
+      tags:
+      - TagEnum.EVENT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Event'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Event'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Event'
+      security:
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+          description: ''
+  /api/events/{id}/:
+    get:
+      operationId: api_events_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this event.
+        required: true
+      tags:
+      - TagEnum.EVENT
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+          description: ''
+    put:
+      operationId: api_events_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this event.
+        required: true
+      tags:
+      - TagEnum.EVENT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Event'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Event'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Event'
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+          description: ''
+    patch:
+      operationId: api_events_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this event.
+        required: true
+      tags:
+      - TagEnum.EVENT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedEvent'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedEvent'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedEvent'
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+          description: ''
+    delete:
+      operationId: api_events_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this event.
+        required: true
+      tags:
+      - TagEnum.EVENT
+      security:
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
   /api/login/:
     post:
       operationId: api_login_create
       tags:
-      - api
+      - Auth
       requestBody:
         content:
           application/json:
@@ -61,11 +369,167 @@ paths:
     post:
       operationId: api_logout_create
       tags:
-      - api
+      - Auth
       security:
       - tokenAuth: []
       responses:
         '200':
+          description: No response body
+  /api/plans/:
+    get:
+      operationId: api_plans_list
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      tags:
+      - TagEnum.PLAN
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPlanList'
+          description: ''
+    post:
+      operationId: api_plans_create
+      tags:
+      - TagEnum.PLAN
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Plan'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Plan'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Plan'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plan'
+          description: ''
+  /api/plans/{id}/:
+    get:
+      operationId: api_plans_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this plan.
+        required: true
+      tags:
+      - TagEnum.PLAN
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plan'
+          description: ''
+    put:
+      operationId: api_plans_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this plan.
+        required: true
+      tags:
+      - TagEnum.PLAN
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Plan'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Plan'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Plan'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plan'
+          description: ''
+    patch:
+      operationId: api_plans_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this plan.
+        required: true
+      tags:
+      - TagEnum.PLAN
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPlan'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPlan'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPlan'
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plan'
+          description: ''
+    delete:
+      operationId: api_plans_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this plan.
+        required: true
+      tags:
+      - TagEnum.PLAN
+      security:
+      - tokenAuth: []
+      responses:
+        '204':
           description: No response body
   /api/professors/:
     get:
@@ -84,7 +548,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - TagEnum.PROFESSOR
       security:
       - tokenAuth: []
       responses:
@@ -97,7 +561,7 @@ paths:
     post:
       operationId: api_professors_create
       tags:
-      - api
+      - TagEnum.PROFESSOR
       requestBody:
         content:
           application/json:
@@ -131,7 +595,7 @@ paths:
         description: A UUID string identifying this Professor.
         required: true
       tags:
-      - api
+      - TagEnum.PROFESSOR
       security:
       - tokenAuth: []
       responses:
@@ -152,7 +616,7 @@ paths:
         description: A UUID string identifying this Professor.
         required: true
       tags:
-      - api
+      - TagEnum.PROFESSOR
       requestBody:
         content:
           application/json:
@@ -185,7 +649,7 @@ paths:
         description: A UUID string identifying this Professor.
         required: true
       tags:
-      - api
+      - TagEnum.PROFESSOR
       requestBody:
         content:
           application/json:
@@ -217,7 +681,163 @@ paths:
         description: A UUID string identifying this Professor.
         required: true
       tags:
-      - api
+      - TagEnum.PROFESSOR
+      security:
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/semesters/:
+    get:
+      operationId: api_semesters_list
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      tags:
+      - TagEnum.SEMESTER
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSemesterList'
+          description: ''
+    post:
+      operationId: api_semesters_create
+      tags:
+      - TagEnum.SEMESTER
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Semester'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Semester'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Semester'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Semester'
+          description: ''
+  /api/semesters/{id}/:
+    get:
+      operationId: api_semesters_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this semester.
+        required: true
+      tags:
+      - TagEnum.SEMESTER
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Semester'
+          description: ''
+    put:
+      operationId: api_semesters_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this semester.
+        required: true
+      tags:
+      - TagEnum.SEMESTER
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Semester'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Semester'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Semester'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Semester'
+          description: ''
+    patch:
+      operationId: api_semesters_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this semester.
+        required: true
+      tags:
+      - TagEnum.SEMESTER
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedSemester'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedSemester'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedSemester'
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Semester'
+          description: ''
+    delete:
+      operationId: api_semesters_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this semester.
+        required: true
+      tags:
+      - TagEnum.SEMESTER
       security:
       - tokenAuth: []
       responses:
@@ -258,7 +878,7 @@ paths:
         schema:
           type: string
       tags:
-      - api
+      - TagEnum.STUDENT
       security:
       - tokenAuth: []
       responses:
@@ -271,7 +891,7 @@ paths:
     post:
       operationId: api_students_create
       tags:
-      - api
+      - TagEnum.STUDENT
       requestBody:
         content:
           application/json:
@@ -305,7 +925,7 @@ paths:
         description: A UUID string identifying this Student.
         required: true
       tags:
-      - api
+      - TagEnum.STUDENT
       security:
       - tokenAuth: []
       responses:
@@ -326,7 +946,7 @@ paths:
         description: A UUID string identifying this Student.
         required: true
       tags:
-      - api
+      - TagEnum.STUDENT
       requestBody:
         content:
           application/json:
@@ -359,7 +979,7 @@ paths:
         description: A UUID string identifying this Student.
         required: true
       tags:
-      - api
+      - TagEnum.STUDENT
       requestBody:
         content:
           application/json:
@@ -382,6 +1002,58 @@ paths:
           description: ''
 components:
   schemas:
+    Building:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+        status:
+          type: string
+          maxLength: 20
+        register_date:
+          type: string
+          format: date-time
+      required:
+      - id
+    Event:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        description:
+          type: string
+        image_url:
+          type: string
+          maxLength: 200
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        status:
+          type: string
+          maxLength: 20
+        register_date:
+          type: string
+          format: date-time
+        building:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+      required:
+      - building
+      - id
     Login:
       type: object
       properties:
@@ -394,6 +1066,93 @@ components:
       required:
       - identification_document
       - password
+    Nested:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+        status:
+          type: string
+          maxLength: 20
+        register_date:
+          type: string
+          format: date-time
+      required:
+      - id
+    PaginatedBuildingList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Building'
+    PaginatedEventList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+    PaginatedPlanList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Plan'
     PaginatedProfessorList:
       type: object
       required:
@@ -417,6 +1176,29 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Professor'
+    PaginatedSemesterList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Semester'
     PaginatedStudentList:
       type: object
       required:
@@ -440,6 +1222,75 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Student'
+    PatchedBuilding:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+        status:
+          type: string
+          maxLength: 20
+        register_date:
+          type: string
+          format: date-time
+    PatchedEvent:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          maxLength: 200
+        description:
+          type: string
+        image_url:
+          type: string
+          maxLength: 200
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        status:
+          type: string
+          maxLength: 20
+        register_date:
+          type: string
+          format: date-time
+        building:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+    PatchedPlan:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        status:
+          type: string
+          maxLength: 20
+        register_date:
+          type: string
+          format: date-time
     PatchedProfessor:
       type: object
       properties:
@@ -463,6 +1314,31 @@ components:
         identification_document:
           type: string
           maxLength: 50
+        status:
+          type: string
+          maxLength: 20
+        register_date:
+          type: string
+          format: date-time
+    PatchedSemester:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        status:
+          type: string
+          maxLength: 20
         register_date:
           type: string
           format: date-time
@@ -530,6 +1406,31 @@ components:
           items:
             type: integer
           description: Specific permissions for this user.
+    Plan:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        status:
+          type: string
+          maxLength: 20
+        register_date:
+          type: string
+          format: date-time
+      required:
+      - end_date
+      - id
     Professor:
       type: object
       properties:
@@ -553,12 +1454,40 @@ components:
         identification_document:
           type: string
           maxLength: 50
+        status:
+          type: string
+          maxLength: 20
         register_date:
           type: string
           format: date-time
       required:
       - id
       - identification_document
+    Semester:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        status:
+          type: string
+          maxLength: 20
+        register_date:
+          type: string
+          format: date-time
+      required:
+      - end_date
+      - id
     Student:
       type: object
       properties:
