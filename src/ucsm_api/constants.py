@@ -9,4 +9,5 @@ class EndpointEnum(str,Enum):
     STUDENT = 'students'
     PROFESSOR = 'professors'
     EVENT = 'events'
+    PLAN = 'plans'
     SCHEMA = 'schema'

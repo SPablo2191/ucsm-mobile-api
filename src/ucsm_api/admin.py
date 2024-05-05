@@ -4,3 +4,4 @@ from ucsm_api.models.professor_model import Professor
 from ucsm_api.models.building_model import Building
 from ucsm_api.models.semester_model import Semester
 from ucsm_api.models.event_model import Event
+from ucsm_api.models.plan_model import Plan

@@ -8,7 +8,7 @@ from ucsm_api.models.utils import TableStatus
 from ucsm_api.serializers.event_serializer import EventSerializer
 from ucsm_api.views.constants import TagEnum
 
-@extend_schema(tags=[TagEnum.EVENT.value])
+@extend_schema(tags=[TagEnum.EVENT])
 class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
