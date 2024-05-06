@@ -18,6 +18,7 @@ class AcademicProgramViewSet(viewsets.ModelViewSet):
 
     def list(self, request):
         queryset = AcademicProgram.objects.filter(status=TableStatus.ACTIVE.value)
+        print(str(queryset.query))
         paginated_queryset = self.paginate_queryset(queryset)
         serializer = AcademicProgramSerializer(paginated_queryset, many=True)
         return self.get_paginated_response(serializer.data)
