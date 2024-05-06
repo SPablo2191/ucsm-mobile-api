@@ -17,7 +17,7 @@ class Enrollment(models.Model):
     register_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return self.student_code
+        return f"{self.student_code} - {self.student}"
 
 @admin.register(Enrollment)
 class EnrollmentAdmin(admin.ModelAdmin):
