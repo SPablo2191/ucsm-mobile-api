@@ -24,7 +24,7 @@ class CommissionSchedule(models.Model):
     register_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return self.day
+        return f"{self.day}: {self.start_time}-{self.end_time}"
 
 @admin.register(CommissionSchedule)
 class CommissionScheduleAdmin(admin.ModelAdmin):

@@ -12,3 +12,4 @@ from ucsm_api.models.debt_model import Debt
 from ucsm_api.models.installment_model import Installment
 from ucsm_api.models.classroom_model import Classroom
 from ucsm_api.models.commission_schedule_model import CommissionSchedule
+from ucsm_api.models.commission_model import Commission
