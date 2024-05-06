@@ -6,3 +6,4 @@ from ucsm_api.models.semester_model import Semester
 from ucsm_api.models.event_model import Event
 from ucsm_api.models.plan_model import Plan
 from ucsm_api.models.academic_program_model import AcademicProgram
+from ucsm_api.models.subject_model import Subject
