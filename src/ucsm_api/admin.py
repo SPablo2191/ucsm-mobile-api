@@ -15,3 +15,4 @@ from ucsm_api.models.commission_schedule_model import CommissionSchedule
 from ucsm_api.models.commission_model import Commission
 from ucsm_api.models.subject_registration_model import SubjectRegistration
 from ucsm_api.models.student_commission_model import StudentCommission
+from ucsm_api.models.grade_model import Grade
