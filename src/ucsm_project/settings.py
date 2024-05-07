@@ -156,4 +156,6 @@ SPECTACULAR_SETTINGS = {
     'DESCRIPTION': 'API REST para la aplicación UCSM Mobile de la Universidad Católica de Santa María',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
+    'COMPONENT_SPLIT_REQUEST': True
 }
+

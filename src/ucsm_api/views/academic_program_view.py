@@ -1,8 +1,7 @@
 from drf_spectacular.utils import extend_schema
-from rest_framework import viewsets, status
+from rest_framework import viewsets
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
 
 from ucsm_api.models.academic_program_model import AcademicProgram
 from ucsm_api.models.utils import TableStatus
@@ -19,13 +18,7 @@ class AcademicProgramViewSet(viewsets.ModelViewSet):
 
     def list(self, request):
         queryset = AcademicProgram.objects.filter(status=TableStatus.ACTIVE.value)
-        print(str(queryset.query))
         paginated_queryset = self.paginate_queryset(queryset)
         serializer = AcademicProgramSerializer(paginated_queryset, many=True)
         return self.get_paginated_response(serializer.data)
     
-    # def destroy(self, request, pk=None):
-    #     instance = self.get_object()
-    #     instance.status = TableStatus.INACTIVE.value
-    #     instance.save()
-    #     return Response(status=status.HTTP_204_NO_CONTENT)
