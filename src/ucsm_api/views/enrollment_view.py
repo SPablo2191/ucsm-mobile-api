@@ -11,22 +11,29 @@ from ucsm_api.models.enrollment_model import Enrollment
 from ucsm_api.models.student_model import Student
 from ucsm_api.serializers.enrollment_serializer import EnrollmentSerializer
 
+
 @extend_schema(
     tags=[TagEnum.ENROLLMENT.value],
     parameters=[
-            OpenApiParameter(name='identification_document', description='DNI', type=str),
-        ]
+        OpenApiParameter(
+            name="identification_document",
+            description="Identification document of student",
+            type=str,
+        ),
+    ],
 )
 class EnrollmentViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Enrollment.objects.all()
     serializer_class = EnrollmentSerializer
     permission_classes = [IsAuthenticated]
-    http_method_names = ["get","retrieve"]
+    http_method_names = ["get", "retrieve"]
     pagination_class = LimitOffsetPagination
 
     def list(self, request):
         try:
-            identification_document = request.query_params.get("identification_document")
+            identification_document = request.query_params.get(
+                "identification_document"
+            )
             student = Student.objects.get(
                 identification_document=identification_document
             )
@@ -41,4 +48,3 @@ class EnrollmentViewSet(viewsets.ReadOnlyModelViewSet):
                 {"error": "El usuario no dispone de enrollments."},
                 status=status.HTTP_404_NOT_FOUND,
             )
-
