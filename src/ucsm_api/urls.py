@@ -10,6 +10,7 @@ from ucsm_api.views.event_view import EventViewSet
 from ucsm_api.views.plan_view import PlanViewSet
 from ucsm_api.views.academic_program_view import AcademicProgramViewSet
 from ucsm_api.views.enrollment_view import EnrollmentViewSet
+from ucsm_api.views.subject_registration_view import SubjectRegistrationViewSet
 from ucsm_api.constants import EndpointEnum
 
 route = routers.SimpleRouter()
@@ -21,6 +22,7 @@ route.register(EndpointEnum.EVENT,EventViewSet)
 route.register(EndpointEnum.PLAN,PlanViewSet)
 route.register(EndpointEnum.ACADEMIC_PROGRAM,AcademicProgramViewSet)
 route.register(EndpointEnum.ENROLLMENT,EnrollmentViewSet)
+route.register(EndpointEnum.SUBJECT_REGISTRATION,SubjectRegistrationViewSet)
 urlpatterns = route.urls
 
 urlpatterns += [

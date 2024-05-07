@@ -32,31 +32,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedAcademicProgramList'
           description: ''
-    post:
-      operationId: api_academic_programs_create
-      tags:
-      - Academic Program
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AcademicProgram'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/AcademicProgram'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/AcademicProgram'
-        required: true
-      security:
-      - tokenAuth: []
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AcademicProgram'
-          description: ''
   /api/academic-programs/{id}/:
     get:
       operationId: api_academic_programs_retrieve
@@ -79,88 +54,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/AcademicProgram'
           description: ''
-    put:
-      operationId: api_academic_programs_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this academic program.
-        required: true
-      tags:
-      - Academic Program
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AcademicProgram'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/AcademicProgram'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/AcademicProgram'
-        required: true
-      security:
-      - tokenAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AcademicProgram'
-          description: ''
-    patch:
-      operationId: api_academic_programs_partial_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this academic program.
-        required: true
-      tags:
-      - Academic Program
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedAcademicProgram'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/PatchedAcademicProgram'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/PatchedAcademicProgram'
-      security:
-      - tokenAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AcademicProgram'
-          description: ''
-    delete:
-      operationId: api_academic_programs_destroy
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this academic program.
-        required: true
-      tags:
-      - Academic Program
-      security:
-      - tokenAuth: []
-      responses:
-        '204':
-          description: No response body
   /api/buildings/:
     get:
       operationId: api_buildings_list
@@ -188,30 +81,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedBuildingList'
           description: ''
-    post:
-      operationId: api_buildings_create
-      tags:
-      - Building
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Building'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Building'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Building'
-      security:
-      - tokenAuth: []
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Building'
-          description: ''
   /api/buildings/{id}/:
     get:
       operationId: api_buildings_retrieve
@@ -234,29 +103,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/Building'
           description: ''
-    put:
-      operationId: api_buildings_update
+  /api/enrollments/:
+    get:
+      operationId: api_enrollments_list
       parameters:
-      - in: path
-        name: id
+      - in: query
+        name: identification_document
         schema:
           type: string
-          format: uuid
-        description: A UUID string identifying this building.
-        required: true
+        description: Identification document of student
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
       tags:
-      - Building
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Building'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Building'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Building'
+      - Enrollment
       security:
       - tokenAuth: []
       responses:
@@ -264,31 +133,26 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Building'
+                $ref: '#/components/schemas/PaginatedEnrollmentList'
           description: ''
-    patch:
-      operationId: api_buildings_partial_update
+  /api/enrollments/{id}/:
+    get:
+      operationId: api_enrollments_retrieve
       parameters:
       - in: path
         name: id
         schema:
           type: string
           format: uuid
-        description: A UUID string identifying this building.
+        description: A UUID string identifying this enrollment.
         required: true
+      - in: query
+        name: identification_document
+        schema:
+          type: string
+        description: Identification document of student
       tags:
-      - Building
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedBuilding'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/PatchedBuilding'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/PatchedBuilding'
+      - Enrollment
       security:
       - tokenAuth: []
       responses:
@@ -296,25 +160,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Building'
+                $ref: '#/components/schemas/Enrollment'
           description: ''
-    delete:
-      operationId: api_buildings_destroy
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this building.
-        required: true
-      tags:
-      - Building
-      security:
-      - tokenAuth: []
-      responses:
-        '204':
-          description: No response body
   /api/events/:
     get:
       operationId: api_events_list
@@ -342,30 +189,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedEventList'
           description: ''
-    post:
-      operationId: api_events_create
-      tags:
-      - Event
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Event'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Event'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Event'
-      security:
-      - tokenAuth: []
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Event'
-          description: ''
   /api/events/{id}/:
     get:
       operationId: api_events_retrieve
@@ -388,87 +211,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Event'
           description: ''
-    put:
-      operationId: api_events_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this event.
-        required: true
-      tags:
-      - Event
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Event'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Event'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Event'
-      security:
-      - tokenAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Event'
-          description: ''
-    patch:
-      operationId: api_events_partial_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this event.
-        required: true
-      tags:
-      - Event
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedEvent'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/PatchedEvent'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/PatchedEvent'
-      security:
-      - tokenAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Event'
-          description: ''
-    delete:
-      operationId: api_events_destroy
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this event.
-        required: true
-      tags:
-      - Event
-      security:
-      - tokenAuth: []
-      responses:
-        '204':
-          description: No response body
   /api/login/:
     post:
       operationId: api_login_create
@@ -478,13 +220,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Login'
+              $ref: '#/components/schemas/LoginRequest'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Login'
+              $ref: '#/components/schemas/LoginRequest'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Login'
+              $ref: '#/components/schemas/LoginRequest'
         required: true
       security:
       - tokenAuth: []
@@ -558,31 +300,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedPlanList'
           description: ''
-    post:
-      operationId: api_plans_create
-      tags:
-      - Plan
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Plan'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Plan'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Plan'
-        required: true
-      security:
-      - tokenAuth: []
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Plan'
-          description: ''
   /api/plans/{id}/:
     get:
       operationId: api_plans_retrieve
@@ -605,88 +322,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Plan'
           description: ''
-    put:
-      operationId: api_plans_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this plan.
-        required: true
-      tags:
-      - Plan
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Plan'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Plan'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Plan'
-        required: true
-      security:
-      - tokenAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Plan'
-          description: ''
-    patch:
-      operationId: api_plans_partial_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this plan.
-        required: true
-      tags:
-      - Plan
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedPlan'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/PatchedPlan'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/PatchedPlan'
-      security:
-      - tokenAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Plan'
-          description: ''
-    delete:
-      operationId: api_plans_destroy
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this plan.
-        required: true
-      tags:
-      - Plan
-      security:
-      - tokenAuth: []
-      responses:
-        '204':
-          description: No response body
   /api/professors/:
     get:
       operationId: api_professors_list
@@ -714,31 +349,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedProfessorList'
           description: ''
-    post:
-      operationId: api_professors_create
-      tags:
-      - Professor
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Professor'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Professor'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Professor'
-        required: true
-      security:
-      - tokenAuth: []
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Professor'
-          description: ''
   /api/professors/{id}/:
     get:
       operationId: api_professors_retrieve
@@ -761,88 +371,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Professor'
           description: ''
-    put:
-      operationId: api_professors_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this Professor.
-        required: true
-      tags:
-      - Professor
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Professor'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Professor'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Professor'
-        required: true
-      security:
-      - tokenAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Professor'
-          description: ''
-    patch:
-      operationId: api_professors_partial_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this Professor.
-        required: true
-      tags:
-      - Professor
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedProfessor'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/PatchedProfessor'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/PatchedProfessor'
-      security:
-      - tokenAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Professor'
-          description: ''
-    delete:
-      operationId: api_professors_destroy
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this Professor.
-        required: true
-      tags:
-      - Professor
-      security:
-      - tokenAuth: []
-      responses:
-        '204':
-          description: No response body
   /api/semesters/:
     get:
       operationId: api_semesters_list
@@ -870,31 +398,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedSemesterList'
           description: ''
-    post:
-      operationId: api_semesters_create
-      tags:
-      - Semester
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Semester'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Semester'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Semester'
-        required: true
-      security:
-      - tokenAuth: []
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Semester'
-          description: ''
   /api/semesters/{id}/:
     get:
       operationId: api_semesters_retrieve
@@ -917,100 +420,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/Semester'
           description: ''
-    put:
-      operationId: api_semesters_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this semester.
-        required: true
-      tags:
-      - Semester
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Semester'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Semester'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Semester'
-        required: true
-      security:
-      - tokenAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Semester'
-          description: ''
-    patch:
-      operationId: api_semesters_partial_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this semester.
-        required: true
-      tags:
-      - Semester
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedSemester'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/PatchedSemester'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/PatchedSemester'
-      security:
-      - tokenAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Semester'
-          description: ''
-    delete:
-      operationId: api_semesters_destroy
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this semester.
-        required: true
-      tags:
-      - Semester
-      security:
-      - tokenAuth: []
-      responses:
-        '204':
-          description: No response body
   /api/students/:
     get:
       operationId: api_students_list
       parameters:
-      - in: query
-        name: email
-        schema:
-          type: string
-      - in: query
-        name: identification_document
-        schema:
-          type: string
       - name: limit
         required: false
         in: query
@@ -1029,10 +442,6 @@ paths:
         description: A search term.
         schema:
           type: string
-      - in: query
-        name: status
-        schema:
-          type: string
       tags:
       - Student
       security:
@@ -1043,31 +452,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PaginatedStudentList'
-          description: ''
-    post:
-      operationId: api_students_create
-      tags:
-      - Student
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Student'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Student'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Student'
-        required: true
-      security:
-      - tokenAuth: []
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Student'
           description: ''
   /api/students/{id}/:
     get:
@@ -1091,30 +475,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/Student'
           description: ''
-    put:
-      operationId: api_students_update
+  /api/subject-registrations/:
+    get:
+      operationId: api_subject_registrations_list
       parameters:
-      - in: path
-        name: id
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
         schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this Student.
-        required: true
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
       tags:
-      - Student
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Student'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Student'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Student'
-        required: true
+      - Building
       security:
       - tokenAuth: []
       responses:
@@ -1122,31 +500,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Student'
+                $ref: '#/components/schemas/PaginatedSubjectRegistrationList'
           description: ''
-    patch:
-      operationId: api_students_partial_update
+  /api/subject-registrations/{id}/:
+    get:
+      operationId: api_subject_registrations_retrieve
       parameters:
       - in: path
         name: id
         schema:
           type: string
           format: uuid
-        description: A UUID string identifying this Student.
+        description: A UUID string identifying this subject registration.
         required: true
       tags:
-      - Student
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedStudent'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/PatchedStudent'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/PatchedStudent'
+      - Building
       security:
       - tokenAuth: []
       responses:
@@ -1154,7 +522,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Student'
+                $ref: '#/components/schemas/SubjectRegistration'
           description: ''
 components:
   schemas:
@@ -1201,6 +569,34 @@ components:
           format: date-time
       required:
       - id
+    Enrollment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        student_code:
+          type: string
+          maxLength: 150
+        status:
+          type: string
+          maxLength: 20
+        register_date:
+          type: string
+          format: date-time
+        academic_program:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+        student:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+      required:
+      - academic_program
+      - id
+      - student
     Event:
       type: object
       properties:
@@ -1235,14 +631,16 @@ components:
       required:
       - building
       - id
-    Login:
+    LoginRequest:
       type: object
       properties:
         identification_document:
           type: string
+          minLength: 1
           maxLength: 50
         password:
           type: string
+          minLength: 1
           maxLength: 128
       required:
       - identification_document
@@ -1257,14 +655,21 @@ components:
         name:
           type: string
           maxLength: 150
+        code:
+          type: string
+          maxLength: 20
         status:
           type: string
           maxLength: 20
         register_date:
           type: string
           format: date-time
+        plan:
+          type: string
+          format: uuid
       required:
       - id
+      - plan
     PaginatedAcademicProgramList:
       type: object
       required:
@@ -1311,6 +716,29 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Building'
+    PaginatedEnrollmentList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Enrollment'
     PaginatedEventList:
       type: object
       required:
@@ -1426,212 +854,29 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Student'
-    PatchedAcademicProgram:
+    PaginatedSubjectRegistrationList:
       type: object
+      required:
+      - count
+      - results
       properties:
-        id:
+        count:
+          type: integer
+          example: 123
+        next:
           type: string
-          format: uuid
-          readOnly: true
-        name:
-          type: string
-          maxLength: 150
-        code:
-          type: string
-          maxLength: 20
-        status:
-          type: string
-          maxLength: 20
-        register_date:
-          type: string
-          format: date-time
-        plan:
-          type: string
-          format: uuid
-    PatchedBuilding:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          type: string
-          maxLength: 150
-        status:
-          type: string
-          maxLength: 20
-        register_date:
-          type: string
-          format: date-time
-    PatchedEvent:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          type: string
-          maxLength: 200
-        description:
-          type: string
-        image_url:
-          type: string
-          maxLength: 200
-        start_date:
-          type: string
-          format: date
-        end_date:
-          type: string
-          format: date
-        status:
-          type: string
-          maxLength: 20
-        register_date:
-          type: string
-          format: date-time
-        building:
-          allOf:
-          - $ref: '#/components/schemas/Nested'
-          readOnly: true
-    PatchedPlan:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          type: string
-          maxLength: 150
-        start_date:
-          type: string
-          format: date
-        end_date:
-          type: string
-          format: date
-        status:
-          type: string
-          maxLength: 20
-        register_date:
-          type: string
-          format: date-time
-    PatchedProfessor:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        first_name:
-          type: string
-          maxLength: 150
-        middle_name:
-          type: string
-          maxLength: 150
-        last_name:
-          type: string
-          maxLength: 150
-        email:
-          type: string
-          format: email
-          maxLength: 254
-        identification_document:
-          type: string
-          maxLength: 50
-        status:
-          type: string
-          maxLength: 20
-        register_date:
-          type: string
-          format: date-time
-    PatchedSemester:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          type: string
-          maxLength: 150
-        start_date:
-          type: string
-          format: date
-        end_date:
-          type: string
-          format: date
-        status:
-          type: string
-          maxLength: 20
-        register_date:
-          type: string
-          format: date-time
-    PatchedStudent:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        password:
-          type: string
-          maxLength: 128
-        first_name:
-          type: string
-          maxLength: 150
-        middle_name:
-          type: string
-          maxLength: 150
-        last_name:
-          type: string
-          maxLength: 150
-        second_last_name:
-          type: string
-          maxLength: 150
-        email:
-          type: string
-          format: email
-          maxLength: 254
-        birth_date:
-          type: string
-          format: date
-        phone_number:
-          type: string
-          maxLength: 20
-        address:
-          type: string
-        identification_document:
-          type: string
-          maxLength: 50
-        status:
-          type: string
-          maxLength: 20
-        register_date:
-          type: string
-          format: date-time
-        last_login:
-          type: string
-          format: date-time
           nullable: true
-        is_active:
-          type: boolean
-        is_staff:
-          type: boolean
-        is_superuser:
-          type: boolean
-        groups:
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
           type: array
           items:
-            type: integer
-          description: The groups this user belongs to. A user will get all permissions
-            granted to each of their groups.
-        user_permissions:
-          type: array
-          items:
-            type: integer
-          description: Specific permissions for this user.
+            $ref: '#/components/schemas/SubjectRegistration'
     Plan:
       type: object
       properties:
@@ -1782,6 +1027,39 @@ components:
       - id
       - identification_document
       - password
+    SubjectRegistration:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        final_score:
+          type: integer
+          maximum: 20
+          minimum: 0
+        simulated_score:
+          type: integer
+          maximum: 20
+          minimum: 0
+        status:
+          type: string
+          maxLength: 20
+        register_date:
+          type: string
+          format: date-time
+        subject:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+        enrollment:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+      required:
+      - enrollment
+      - id
+      - subject
   securitySchemes:
     tokenAuth:
       type: apiKey
