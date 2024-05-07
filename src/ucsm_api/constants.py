@@ -14,3 +14,4 @@ class EndpointEnum(str,Enum):
     ACADEMIC_PROGRAM = 'academic-programs'
     ENROLLMENT = 'enrollments'
     SUBJECT_REGISTRATION = 'subject-registrations'
+    DEBT = "debts"

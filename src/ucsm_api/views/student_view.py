@@ -1,4 +1,5 @@
 from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import get_object_or_404
 from django.contrib.auth import authenticate
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import extend_schema
@@ -15,17 +16,18 @@ from ucsm_api.models.student_model import Student
 from ucsm_api.serializers.student_serializer import StudentSerializer,LoginSerializer
 
 @extend_schema(tags=[TagEnum.STUDENT.value])
-class StudentViewSet(viewsets.ReadOnlyModelViewSet):
+class StudentViewSet(viewsets.GenericViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
     http_method_names = ["get","retrieve"]
     permission_classes = [IsAuthenticated]
-    def list(self,request):
-        return Response(
-                {"error": "El usuario no dispone de los permisos Para acceder a dichos registros."},
-                status=status.HTTP_401_UNAUTHORIZED,
-            )
+
+    def retrieve(self, request, pk=None):
+        queryset = Student.objects.all()
+        user = get_object_or_404(queryset, pk=pk)
+        serializer = StudentSerializer(user)
+        return Response(serializer.data)
 
 
 @extend_schema(tags=[TagEnum.AUTH.value])

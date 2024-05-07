@@ -11,3 +11,4 @@ class TagEnum(str,Enum):
     SUBJECT_REGISTRATION = "Subject Registration"
     ACADEMIC_PROGRAM = "Academic Program"
     ENROLLMENT = "Enrollment"
+    DEBT = "Debt"

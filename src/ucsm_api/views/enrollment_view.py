@@ -18,7 +18,7 @@ from ucsm_api.serializers.enrollment_serializer import EnrollmentSerializer
         OpenApiParameter(
             name="identification_document",
             description="Identification document of student",
-            type=str,
+            type=str
         ),
     ],
 )
