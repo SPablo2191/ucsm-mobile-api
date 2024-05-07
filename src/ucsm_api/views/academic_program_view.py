@@ -9,11 +9,11 @@ from ucsm_api.serializers.academic_program_serializer import AcademicProgramSeri
 from ucsm_api.views.constants import TagEnum
 
 @extend_schema(tags=[TagEnum.ACADEMIC_PROGRAM.value])
-class AcademicProgramViewSet(viewsets.ModelViewSet):
+class AcademicProgramViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = AcademicProgram.objects.all()
     serializer_class = AcademicProgramSerializer
     permission_classes = [IsAuthenticated]
-    http_method_names = ["get"]
+    http_method_names =  ["get","retrieve"]
     pagination_class = LimitOffsetPagination 
 
     def list(self, request):

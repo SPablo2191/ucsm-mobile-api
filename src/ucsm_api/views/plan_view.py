@@ -10,11 +10,11 @@ from ucsm_api.serializers.plan_serializer import PlanSerializer
 from ucsm_api.views.constants import TagEnum
 
 @extend_schema(tags=[TagEnum.PLAN.value])
-class PlanViewSet(viewsets.ModelViewSet):
+class PlanViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Plan.objects.all()
     serializer_class = PlanSerializer
     permission_classes = [IsAuthenticated]
-    http_method_names = ["get"]
+    http_method_names = ["get","retrieve"]
     pagination_class = LimitOffsetPagination 
 
     def list(self, request):
@@ -23,8 +23,3 @@ class PlanViewSet(viewsets.ModelViewSet):
         serializer = PlanSerializer(paginated_queryset, many=True)
         return self.get_paginated_response(serializer.data)
     
-    # def destroy(self, request, pk=None):
-    #     instance = self.get_object()
-    #     instance.status = TableStatus.INACTIVE.value
-    #     instance.save()
-    #     return Response(status=status.HTTP_204_NO_CONTENT)

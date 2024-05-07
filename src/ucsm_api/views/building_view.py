@@ -10,11 +10,11 @@ from ucsm_api.serializers.building_serializer import BuildingSerializer
 from ucsm_api.views.constants import TagEnum
 
 @extend_schema(tags=[TagEnum.BUILDING.value])
-class BuildingViewSet(viewsets.ModelViewSet):
+class BuildingViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Building.objects.all()
     serializer_class = BuildingSerializer
     permission_classes = [IsAuthenticated]
-    http_method_names = ["get"]
+    http_method_names = ["get","retrieve"]
     pagination_class = LimitOffsetPagination 
 
     def list(self, request):
@@ -22,9 +22,3 @@ class BuildingViewSet(viewsets.ModelViewSet):
         paginated_queryset = self.paginate_queryset(queryset)
         serializer = BuildingSerializer(paginated_queryset, many=True)
         return self.get_paginated_response(serializer.data)
-    
-    # def destroy(self, request, pk=None):
-    #     instance = self.get_object()
-    #     instance.status = TableStatus.INACTIVE.value
-    #     instance.save()
-    #     return Response(status=status.HTTP_204_NO_CONTENT)

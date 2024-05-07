@@ -14,11 +14,11 @@ from ucsm_api.serializers.enrollment_serializer import EnrollmentSerializer
 @extend_schema(
     tags=[TagEnum.ENROLLMENT.value],
 )
-class EnrollmentViewSet(viewsets.ModelViewSet):
+class EnrollmentViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Enrollment.objects.all()
     serializer_class = EnrollmentSerializer
     permission_classes = [IsAuthenticated]
-    http_method_names = ["get"]
+    http_method_names = ["get","retrieve"]
     pagination_class = LimitOffsetPagination
 
     def list(self, request):
