@@ -17,6 +17,7 @@ class EnrollmentViewSet(viewsets.ModelViewSet):
     queryset = Enrollment.objects.all()
     serializer_class = EnrollmentSerializer
     permission_classes = [IsAuthenticated]
+    http_method_names = ["get"]
     pagination_class = LimitOffsetPagination
 
     def list(self, request):

@@ -15,6 +15,7 @@ class SemesterViewSet(viewsets.ModelViewSet):
     queryset = Semester.objects.all()
     serializer_class = SemesterSerializer
     permission_classes = [IsAuthenticated]
+    http_method_names = ["get"]
     pagination_class = LimitOffsetPagination 
 
     def list(self, request):
@@ -23,8 +24,8 @@ class SemesterViewSet(viewsets.ModelViewSet):
         serializer = SemesterSerializer(paginated_queryset, many=True)
         return self.get_paginated_response(serializer.data)
     
-    def destroy(self, request, pk=None):
-        instance = self.get_object()
-        instance.status = TableStatus.INACTIVE.value
-        instance.save()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+    # def destroy(self, request, pk=None):
+    #     instance = self.get_object()
+    #     instance.status = TableStatus.INACTIVE.value
+    #     instance.save()
+    #     return Response(status=status.HTTP_204_NO_CONTENT)

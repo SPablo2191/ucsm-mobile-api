@@ -14,22 +14,22 @@ from ucsm_api.views.constants import TagEnum
 from ucsm_api.models.student_model import Student
 from ucsm_api.serializers.student_serializer import StudentSerializer,LoginSerializer
 
-@extend_schema(tags=[TagEnum.STUDENT.value])
-class StudentViewSet(viewsets.ModelViewSet):
-    queryset = Student.objects.all()
-    serializer_class = StudentSerializer
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
-    http_method_names = ["get", "post", "retrieve", "put", "patch"]
-    ordering_fields = ["register_date", "birth_date"]
-    filterset_fields = ["identification_document", "email", "status"]
-    search_fields = ["identification_document"]
-    permission_classes = [IsAdminUser]
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        ordering = self.request.query_params.get("ordering", None)
-        if ordering:
-            return queryset.order_by(ordering)
-        return queryset
+# @extend_schema(tags=[TagEnum.STUDENT.value])
+# class StudentViewSet(viewsets.ModelViewSet):
+#     queryset = Student.objects.all()
+#     serializer_class = StudentSerializer
+#     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+#     http_method_names = ["get", "post", "retrieve", "put", "patch"]
+#     ordering_fields = ["register_date", "birth_date"]
+#     filterset_fields = ["identification_document", "email", "status"]
+#     search_fields = ["identification_document"]
+#     permission_classes = [IsAdminUser]
+#     def get_queryset(self):
+#         queryset = super().get_queryset()
+#         ordering = self.request.query_params.get("ordering", None)
+#         if ordering:
+#             return queryset.order_by(ordering)
+#         return queryset
 
 @extend_schema(tags=[TagEnum.AUTH.value])
 @permission_classes((AllowAny,))
