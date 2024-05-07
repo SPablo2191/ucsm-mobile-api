@@ -9,3 +9,4 @@ class TagEnum(str,Enum):
     EVENT = "Event"
     PLAN = "Plan"
     ACADEMIC_PROGRAM = "Academic Program"
+    ENROLLMENT = "Enrollment"
