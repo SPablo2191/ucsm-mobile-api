@@ -1,11 +1,14 @@
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
+from django.shortcuts import get_object_or_404
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from rest_framework import viewsets, status
+from rest_framework.decorators import action
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from ucsm_api.models.subject_registration_model import SubjectRegistration
+from ucsm_api.models.subject_model import Subject
 from ucsm_api.models.utils import TableStatus
 from ucsm_api.models.enrollment_model import Enrollment
 from ucsm_api.serializers.subject_registration_serializer import (
@@ -44,6 +47,33 @@ class SubjectRegistrationViewSet(viewsets.ReadOnlyModelViewSet):
                 enrollment_id=enrollment_id, semester_id=semester_id
             )
         return self.get_subjects_by_enrollment(enrollment_id=enrollment_id)
+
+    @action(methods=["GET"], detail=False)
+    def get_statistics(self, request):
+        enrollment_id = request.query_params.get("enrollment_id")
+        # approved subjects
+        student_enrollment = get_object_or_404(Enrollment, id=enrollment_id)
+        approved_subjects = SubjectRegistration.objects.filter(
+            status=TableStatus.ACTIVE.value,
+            enrollment=student_enrollment,
+            final_score__gte=12,
+        ).count()
+        # remaining subjects
+        remaining_subjects = (
+            Subject.objects.select_related("academic_program")
+            .filter(
+                status=TableStatus.ACTIVE.value,
+                academic_program=student_enrollment.academic_program,
+            )
+            .count()
+        )
+        return Response(
+            {
+                "approved_subjects": approved_subjects,
+                "remaining_subjects": remaining_subjects,
+            },
+            status=status.HTTP_200_OK,
+        )
 
     def get_subjects_of_current_semester(self, enrollment_id: str, semester_id: str):
         try:
