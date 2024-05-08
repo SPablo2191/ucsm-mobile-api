@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from ucsm_api.models.semester_model import Semester
 from ucsm_api.serializers.semester_serializer import SemesterSerializer
 from ucsm_api.models.utils import TableStatus
-from ucsm_api.views.constants import TagEnum
+from ucsm_api.views.utils import TagEnum
 
 @extend_schema(tags=[TagEnum.SEMESTER.value])
 class SemesterViewSet(viewsets.ReadOnlyModelViewSet):

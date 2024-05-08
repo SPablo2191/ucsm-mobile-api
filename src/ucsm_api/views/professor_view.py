@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from ucsm_api.models.professor_model import Professor
 from ucsm_api.serializers.professor_serializer import ProfessorSerializer
 from ucsm_api.models.utils import TableStatus
-from ucsm_api.views.constants import TagEnum
+from ucsm_api.views.utils import TagEnum
 
 @extend_schema(tags=[TagEnum.PROFESSOR.value])
 class ProfessorViewSet(viewsets.ReadOnlyModelViewSet):

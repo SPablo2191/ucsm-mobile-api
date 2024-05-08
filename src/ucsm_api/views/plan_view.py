@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from ucsm_api.models.plan_model import Plan
 from ucsm_api.models.utils import TableStatus
 from ucsm_api.serializers.plan_serializer import PlanSerializer
-from ucsm_api.views.constants import TagEnum
+from ucsm_api.views.utils import TagEnum
 
 @extend_schema(tags=[TagEnum.PLAN.value])
 class PlanViewSet(viewsets.ReadOnlyModelViewSet):

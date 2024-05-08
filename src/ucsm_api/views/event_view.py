@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from ucsm_api.models.event_model import Event
 from ucsm_api.models.utils import TableStatus
 from ucsm_api.serializers.event_serializer import EventSerializer
-from ucsm_api.views.constants import TagEnum
+from ucsm_api.views.utils import TagEnum
 
 @extend_schema(tags=[TagEnum.EVENT.value])
 class EventViewSet(viewsets.ReadOnlyModelViewSet):

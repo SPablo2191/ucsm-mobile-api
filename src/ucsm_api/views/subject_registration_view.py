@@ -11,7 +11,7 @@ from ucsm_api.models.enrollment_model import Enrollment
 from ucsm_api.serializers.subject_registration_serializer import (
     SubjectRegistrationSerializer,
 )
-from ucsm_api.views.constants import TagEnum
+from ucsm_api.views.utils import TagEnum
 
 
 @extend_schema(

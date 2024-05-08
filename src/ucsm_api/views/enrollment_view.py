@@ -5,7 +5,7 @@ from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from ucsm_api.views.constants import TagEnum
+from ucsm_api.views.utils import TagEnum
 from ucsm_api.models.utils import TableStatus
 from ucsm_api.models.enrollment_model import Enrollment
 from ucsm_api.models.student_model import Student

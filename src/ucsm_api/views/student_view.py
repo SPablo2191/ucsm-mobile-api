@@ -11,7 +11,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from ucsm_api.views.authentication import token_expire_handler, expires_in
-from ucsm_api.views.constants import TagEnum
+from ucsm_api.views.utils import TagEnum
 from ucsm_api.models.student_model import Student
 from ucsm_api.serializers.student_serializer import StudentSerializer,LoginSerializer
 

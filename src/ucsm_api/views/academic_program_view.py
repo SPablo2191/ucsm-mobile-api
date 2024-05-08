@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from ucsm_api.models.academic_program_model import AcademicProgram
 from ucsm_api.models.utils import TableStatus
 from ucsm_api.serializers.academic_program_serializer import AcademicProgramSerializer
-from ucsm_api.views.constants import TagEnum
+from ucsm_api.views.utils import TagEnum
 
 @extend_schema(tags=[TagEnum.ACADEMIC_PROGRAM.value])
 class AcademicProgramViewSet(viewsets.ReadOnlyModelViewSet):

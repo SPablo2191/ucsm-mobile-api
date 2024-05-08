@@ -10,7 +10,7 @@ from ucsm_api.models.debt_model import Debt
 from ucsm_api.models.installment_model import Installment
 from ucsm_api.models.utils import TableStatus
 from ucsm_api.serializers.debt_serializer import DebtSerializer
-from ucsm_api.views.constants import TagEnum
+from ucsm_api.views.utils import TagEnum
 
 
 @extend_schema(
