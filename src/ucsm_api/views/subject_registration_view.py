@@ -14,6 +14,7 @@ from ucsm_api.models.enrollment_model import Enrollment
 from ucsm_api.serializers.subject_registration_serializer import (
     SubjectRegistrationSerializer,
 )
+from ucsm_api.serializers.subject_serializer import SubjectSerializer
 from ucsm_api.views.utils import TagEnum
 
 
@@ -47,6 +48,26 @@ class SubjectRegistrationViewSet(viewsets.ReadOnlyModelViewSet):
                 enrollment_id=enrollment_id, semester_id=semester_id
             )
         return self.get_subjects_by_enrollment(enrollment_id=enrollment_id)
+
+    @action(methods=["GET"], detail=False)
+    def get_remaining_subjects(self, request):
+        enrollment_id = request.query_params.get("enrollment_id")
+        semester_id = request.query_params.get("semester_id")
+        student_enrollment = get_object_or_404(Enrollment, id=enrollment_id)
+        if semester_id is None:
+            queryset = Subject.objects.select_related("academic_program").filter(
+                status=TableStatus.ACTIVE.value,
+                academic_program=student_enrollment.academic_program,
+            )
+        else:
+            queryset = Subject.objects.select_related("academic_program").filter(
+                status=TableStatus.ACTIVE.value,
+                academic_program=student_enrollment.academic_program,
+                semester = semester_id
+            )
+        paginated_queryset = self.paginate_queryset(queryset)
+        serializer = SubjectSerializer(paginated_queryset, many=True)
+        return self.get_paginated_response(serializer.data)
 
     @action(methods=["GET"], detail=False)
     def get_statistics(self, request):
