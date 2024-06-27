@@ -30,7 +30,9 @@ SECRET_KEY = "django-insecure-8ob(4*ijdrszf#rnj0+8m2-b-9szrt7z)wc(@xpmzhz(hwsd()
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'ucsm-mobile-api.onrender.com'
+]
 
 
 # Application definition
