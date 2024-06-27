@@ -1,20 +1,44 @@
-version: '3'
+version: "3.8"
 
 services:
+  postgres:
+    image: postgres
+    restart: always
+    ports:
+      - "5434:5432"
+    environment:
+      - DATABASE_HOST=127.0.0.1
+      - POSTGRES_USER=me
+      - POSTGRES_PASSWORD=contrasena
+      - POSTGRES_DB=root
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@admin.com"
+      PGADMIN_DEFAULT_PASSWORD: "contrasena"
+    ports:
+      - "8080:80"
+    depends_on:
+      - postgres
+
   web:
-    build: .
-    command: python src/manage.py runserver 0.0.0.0:8000
-    volumes:
-      - .:/code
+    build:
+      context: .
+      dockerfile: ./deployment/images/backend.Dockerfile
+    container_name: ucsm-api
+    image: ucsm-api
+    command: python manage.py runserver  0.0.0.0:8000
+    environment:
+      &backend_environment
+      - DJANGO_DEBUG=true
     ports:
       - "8000:8000"
-    depends_on:
-      - db
-  db:
-    image: postgres
+      - "8888:8888"
     volumes:
-      - ./data/db:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      &backend_volumes
+      - ./backend:/app:cached
+    depends_on:
+      &backend_depends_on
+      - postgres
+
