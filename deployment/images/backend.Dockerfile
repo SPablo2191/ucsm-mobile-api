@@ -14,12 +14,12 @@ COPY requirements/dev.txt /app/
 RUN python3 -m pip install --upgrade pip
 RUN pip install --no-cache-dir -r dev.txt
 
+ADD src /app/
+# COPY src/ucsm_project /app/ucsm_project
+# COPY src/ucsm_api /app/ucsm_api
 
-COPY src/ucsm_project /app/ucsm_project
-COPY src/ucsm_api /app/ucsm_api
-
-# Copiar manage.py a /app/ en la imagen
-COPY src/manage.py /app/
+# # Copiar manage.py a /app/ en la imagen
+# COPY src/manage.py /app/
 # COPY plataforma/src /app/src/
 # COPY plataforma/statics /app/statics/
 

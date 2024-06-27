@@ -27,7 +27,6 @@ services:
       context: .
       dockerfile: ./deployment/images/backend.Dockerfile
     container_name: ucsm-api
-    image: ucsm-api
     command: python manage.py runserver  0.0.0.0:8000
     environment:
       &backend_environment
@@ -35,9 +34,6 @@ services:
     ports:
       - "8000:8000"
       - "8888:8888"
-    volumes:
-      &backend_volumes
-      - ./backend:/app:cached
     depends_on:
       &backend_depends_on
       - postgres
