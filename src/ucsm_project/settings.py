@@ -32,7 +32,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'ucsm-mobile-api.onrender.com',
-    '127.0.0.1'
+    '127.0.0.1',
+    '0.0.0.0'
 ]
 
 
