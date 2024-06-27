@@ -27,7 +27,7 @@ services:
       context: .
       dockerfile: ./deployment/images/backend.Dockerfile
     container_name: ucsm-api
-    command: python manage.py runserver  0.0.0.0:8000
+    command: python -m gunicorn --config gunicorn_config.py ucsm_project.asgi:application -k uvicorn.workers.UvicornWorker
     environment:
       &backend_environment
       - DJANGO_DEBUG=true
