@@ -31,7 +31,8 @@ SECRET_KEY = "django-insecure-8ob(4*ijdrszf#rnj0+8m2-b-9szrt7z)wc(@xpmzhz(hwsd()
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'ucsm-mobile-api.onrender.com'
+    'ucsm-mobile-api.onrender.com',
+    '127.0.0.1'
 ]
 
 
