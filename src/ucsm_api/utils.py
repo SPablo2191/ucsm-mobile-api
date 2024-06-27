@@ -1,6 +1,6 @@
-from enum import Enum
+from enum import Enum,StrEnum
 
-class EndpointEnum(str,Enum):
+class EndpointEnum(StrEnum):
     DOCS = 'docs'
     LOGOUT = 'logout'
     LOGIN = 'login'
