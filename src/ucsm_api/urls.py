@@ -20,8 +20,8 @@ route.register(EndpointEnum.DEBT,DebtViewSet)
 urlpatterns = route.urls
 
 urlpatterns += [
-    path(f'{EndpointEnum.SCHEMA}', SpectacularAPIView.as_view(), name='schema'),
-    path(f'{EndpointEnum.DOCS}', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
-    path(f'{EndpointEnum.LOGIN}', StudentLoginAPIView.as_view(), name='user-login'),
-    path(f'{EndpointEnum.LOGOUT}', StudentLogoutAPIView.as_view(), name='user-logout')
+    path(f'{EndpointEnum.SCHEMA}/', SpectacularAPIView.as_view(), name='schema'),
+    path(f'{EndpointEnum.DOCS}/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path(f'{EndpointEnum.LOGIN}/', StudentLoginAPIView.as_view(), name='user-login'),
+    path(f'{EndpointEnum.LOGOUT}/', StudentLogoutAPIView.as_view(), name='user-logout')
 ]
