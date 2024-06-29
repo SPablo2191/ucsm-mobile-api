@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "django_filters",
     "django_extensions",
     'drf_spectacular',
+    'corsheaders',
     "ucsm_api",
 ]
 
@@ -62,7 +63,12 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8100'
 ]
 
 ROOT_URLCONF = "ucsm_project.urls"
