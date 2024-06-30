@@ -69,7 +69,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8100',
-    'http://localhost',
+    'https://localhost',
     'capacitor://localhost'
 ]
 
