@@ -68,7 +68,9 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:8100'
+    'http://localhost:8100',
+    'http://localhost',
+    'capacitor://localhost'
 ]
 
 ROOT_URLCONF = "ucsm_project.urls"
