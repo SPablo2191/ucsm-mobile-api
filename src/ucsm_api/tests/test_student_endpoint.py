@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.test import  force_authenticate
 
 from ucsm_api.views.student_view import StudentViewSet
-from test_base_endpoint import BaseTests
+from ucsm_api.tests.test_base_endpoint import BaseTests
 
 class StudentTests(BaseTests):
     def test_get_student(self):
